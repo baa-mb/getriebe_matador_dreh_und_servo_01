@@ -1,5 +1,5 @@
 function schalte () {
-    schritt = (wink_1 - wink_0) / 10
+    schritt = (wink_1 - wink_0) / 5
     if (lauf_b) {
         faktor = 1
         startwinkel = wink_0
@@ -7,17 +7,31 @@ function schalte () {
         faktor = -1
         startwinkel = wink_1
     }
-    for (let Index = 0; Index <= 10; Index++) {
+    for (let Index = 0; Index <= 5; Index++) {
         w = schritt * Index * faktor
         pins.servoWritePin(AnalogPin.P15, startwinkel + w)
-        basic.pause(500)
+        basic.pause(200)
     }
 }
 input.onButtonPressed(Button.A, function () {
     lauf_a = !(lauf_a)
     if (lauf_a) {
+        basic.showLeds(`
+            . . # . .
+            . # . # .
+            # . . . #
+            . . . . .
+            . . . . .
+            `)
         kitronik_motor_driver.motorOn(kitronik_motor_driver.Motors.Motor1, kitronik_motor_driver.MotorDirection.Forward, 50)
     } else {
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            # # # # #
+            . . . . .
+            . . . . .
+            `)
         kitronik_motor_driver.motorOff(kitronik_motor_driver.Motors.Motor1)
     }
 })
@@ -26,19 +40,24 @@ function init () {
     basic.showIcon(IconNames.Yes)
     lauf_a = false
     lauf_b = false
-    wink_0 = 75
-    wink_1 = 152
+    wink_0 = 50
+    wink_1 = 170
 }
 function test () {
     for (let index = 0; index < 4; index++) {
         basic.pause(500)
-        pins.servoWritePin(AnalogPin.P15, wink_1)
+        pins.servoWritePin(0, wink_1)
         basic.pause(500)
-        pins.servoWritePin(AnalogPin.P15, wink_0)
+        pins.servoWritePin(0, wink_0)
     }
 }
 input.onButtonPressed(Button.B, function () {
     lauf_b = !(lauf_b)
+    if (lauf_b) {
+        basic.showIcon(IconNames.SmallDiamond)
+    } else {
+        basic.showIcon(IconNames.SmallSquare)
+    }
     schalte()
 })
 radio.onReceivedStringDeprecated(function (receivedString) {
