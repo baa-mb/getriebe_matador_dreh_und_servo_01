@@ -1,5 +1,5 @@
 function schalte () {
-    schritt = (wink_1 - wink_0) / 5
+    schritt = (wink_1 - wink_0) / 10
     if (lauf_b) {
         faktor = 1
         startwinkel = wink_0
@@ -7,7 +7,7 @@ function schalte () {
         faktor = -1
         startwinkel = wink_1
     }
-    for (let Index = 0; Index <= 5; Index++) {
+    for (let Index = 0; Index <= 10; Index++) {
         w = schritt * Index * faktor
         pins.servoWritePin(AnalogPin.P15, startwinkel + w)
         basic.pause(200)
@@ -40,14 +40,14 @@ function init () {
     basic.showIcon(IconNames.Yes)
     lauf_a = false
     lauf_b = false
-    wink_0 = 50
-    wink_1 = 170
+    wink_0 = 80
+    wink_1 = 155
 }
 function test () {
     for (let index = 0; index < 4; index++) {
         basic.pause(500)
         pins.servoWritePin(0, wink_1)
-        basic.pause(500)
+basic.pause(500)
         pins.servoWritePin(0, wink_0)
     }
 }
@@ -83,8 +83,8 @@ let w = 0
 let startwinkel = 0
 let faktor = 0
 let lauf_b = false
-let wink_0 = 0
-let wink_1 = 0
 let schritt = 0
+let wink_1 = 0
+let wink_0 = 0
 init()
 test()
