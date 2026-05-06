@@ -1,11 +1,11 @@
 function schalte () {
-    schritt = (wink_1 - wink_0) / 10
+    schritt = (wink_links - wink_rechts) / 10
     if (lauf_b) {
         faktor = 1
-        startwinkel = wink_0
+        startwinkel = wink_rechts
     } else {
         faktor = -1
-        startwinkel = wink_1
+        startwinkel = wink_links
     }
     for (let Index = 0; Index <= 10; Index++) {
         w = schritt * Index * faktor
@@ -40,8 +40,8 @@ function init () {
     basic.showIcon(IconNames.Yes)
     lauf_a = false
     lauf_b = false
-    wink_0 = 80
-    wink_1 = 155
+    wink_rechts = 60
+    wink_links = 155
 }
 function test () {
     for (let index = 0; index < 4; index++) {
@@ -83,6 +83,8 @@ let w = 0
 let startwinkel = 0
 let faktor = 0
 let lauf_b = false
+let wink_rechts = 0
+let wink_links = 0
 let schritt = 0
 let wink_1 = 0
 let wink_0 = 0
