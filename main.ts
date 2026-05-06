@@ -12,6 +12,11 @@ function schalte () {
         pins.servoWritePin(AnalogPin.P15, startwinkel + w)
         basic.pause(200)
     }
+    if (faktor == -1) {
+        basic.showIcon(IconNames.Heart)
+        basic.pause(1000)
+        pins.servoWritePin(AnalogPin.P15, wink_rechts - 10)
+    }
 }
 input.onButtonPressed(Button.A, function () {
     lauf_a = !(lauf_a)
@@ -40,7 +45,7 @@ function init () {
     basic.showIcon(IconNames.Yes)
     lauf_a = false
     lauf_b = false
-    wink_rechts = 60
+    wink_rechts = 65
     wink_links = 155
 }
 function test () {
@@ -86,7 +91,7 @@ let lauf_b = false
 let wink_rechts = 0
 let wink_links = 0
 let schritt = 0
-let wink_1 = 0
 let wink_0 = 0
+let wink_1 = 0
 init()
 test()
